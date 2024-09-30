@@ -69,8 +69,18 @@ def main():
     except Exception as e:
         print(f"An error occurred: {e}")
 
-    # Prompt the user to input a speech file name
-    file_name = input("Input speech file name to check: ")
+    # Prompt the user to input a speech file name and check for validity
+    while True:
+        file_name = input("Input speech file name to check: ")
+        if file_name in files:
+            print(f"File '{file_name}' is valid.")
+            print("Transcribing MP3 File to Text")
+            break
+        else:
+            print(
+                f"File '{file_name}' does not exist in the directory. Please try again."
+            )
+
     # Ensure speech_to_text function is defined
     speech_to_text(file_name)
     Transcript_Counter(file_name)
