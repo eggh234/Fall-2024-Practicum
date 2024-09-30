@@ -12,7 +12,7 @@ base_file_path = "/Users/daniel_huang/Desktop/Fall-2024-Practicum"
 
 
 def speech_to_text(file_name):
-    file_path = os.path.join(base_file_path, "Speeches", f"{file_name}.mp3")
+    file_path = os.path.join(base_file_path, "Speeches", f"{file_name}")
     output_dir = os.path.join(base_file_path, "Text_Transcripts")
     output_file_path = os.path.join(output_dir, f"{file_name}-transcript.txt")
 
@@ -57,6 +57,19 @@ def Transcript_Counter(file_name):
 
 
 def main():
+    speeches_path = os.path.join(base_file_path, "Speeches")
+    try:
+        # List all files in the directory
+        files = os.listdir(speeches_path)
+        print("Speech files in the directory:")
+        for file in files:
+            print(file)
+    except FileNotFoundError:
+        print(f"The directory {speeches_path} does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    # Prompt the user to input a speech file name
     file_name = input("Input speech file name to check: ")
     # Ensure speech_to_text function is defined
     speech_to_text(file_name)
