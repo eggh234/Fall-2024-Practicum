@@ -8,21 +8,15 @@ import os
 # import numpy as np
 
 client = OpenAI()
+base_file_path = "/Users/daniel_huang/Desktop/Fall-2024-Practicum"
 
 
-def speech_to_text(file_path):
-    file_name = os.path.basename(file_path)
-
-    # Define the directory for the output file
-    output_dir = "/Users/daniel_huang/Desktop/Practicum/Text_Transcripts"
-
-    # Create the output file path
+def speech_to_text(file_name):
+    file_path = os.path.join(base_file_path, "Speeches", f"{file_name}.mp3")
+    output_dir = os.path.join(base_file_path, "Text_Transcripts")
     output_file_path = os.path.join(output_dir, f"{file_name}-transcript.txt")
 
-    audio_file = open(
-        file_path,
-        "rb",
-    )
+    audio_file = open(file_path, "rb")
     transcription = client.audio.transcriptions.create(
         model="whisper-1", file=audio_file
     )
@@ -34,21 +28,15 @@ def speech_to_text(file_path):
     print("Formatted transcription saved to", output_file_path)
 
 
-def main():
-    speech_to_text(
-        "/Users/daniel_huang/Desktop/Practicum/Speeches/Dream-English-Traditional-ABC01.mp3"
+def Transcript_Counter(file_name):
+    transcript_file_path = os.path.join(
+        base_file_path, "Text_Transcripts", f"{file_name}-transcript.txt"
     )
 
-
-if __name__ == "__main__":
-    main()
-
-
-def count_words_in_text_file(file_path):
     word_counts = {}
     timestamp_pattern = re.compile(r"\(.*?\)")
 
-    with open(file_path, "r") as file:
+    with open(transcript_file_path, "r") as file:
         text = file.read()
         text = timestamp_pattern.sub("", text)  # Remove timestamps
         words = text.split()
@@ -60,21 +48,23 @@ def count_words_in_text_file(file_path):
             else:
                 word_counts[word] = 1
 
-    return word_counts
-
-
-def write_word_counts_to_file(word_counts, output_file_path):
-    with open(output_file_path, "w") as file:
+    output_file_name = os.path.join(
+        base_file_path, "Text_Counter", f"{file_name}-count.txt"
+    )
+    with open(output_file_name, "w") as output_file:
         for word, count in word_counts.items():
-            file.write(f"{word}: {count}\n")
+            output_file.write(f"{word}: {count}\n")
 
 
-file_path = "/Users/daniel_huang/Desktop/Practicum/Text_Transcripts/Speech1.txt"
-output_file_path = (
-    "/Users/daniel_huang/Desktop/Practicum/Text_Transcripts/Speech1_count.txt"
-)
-word_counts = count_words_in_text_file(file_path)
-write_word_counts_to_file(word_counts, output_file_path)
+def main():
+    file_name = input("Input speech file name to check: ")
+    # Ensure speech_to_text function is defined
+    speech_to_text(file_name)
+    Transcript_Counter(file_name)
+
+
+if __name__ == "__main__":
+    main()
 
 # # Load the MP3 file
 # audio_path = "/Users/daniel_huang/Desktop/Practicum/Speeches/trump_farewell_address.mp3"
