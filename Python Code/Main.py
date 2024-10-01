@@ -1,14 +1,11 @@
 from openai import OpenAI
-import re
-import os
-import librosa
-import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 from pydub import AudioSegment
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
-from tempfile import mktemp
+import re
+import os
 
 client = OpenAI()
 base_file_path = "/Users/daniel_huang/Desktop/Fall-2024-Practicum"
