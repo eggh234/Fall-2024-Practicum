@@ -1,14 +1,40 @@
 from openai import OpenAI
 import re
 import os
-
-# import librosa
-# import librosa.display
-# import matplotlib.pyplot as plt
-# import numpy as np
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
+import numpy as np
+from pydub import AudioSegment
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+from tempfile import mktemp
 
 client = OpenAI()
 base_file_path = "/Users/daniel_huang/Desktop/Fall-2024-Practicum"
+
+
+def MP3_to_Chart(file_name):
+    # Construct the file path
+    file_path = os.path.join(base_file_path, "Speeches", file_name)
+    output_file_path = os.path.join(
+        base_file_path,
+        "Spectograms",
+        f"{os.path.splitext(file_name)[0]}-spectrogram.png",
+    )
+
+    mp3_audio = AudioSegment.from_file(file_path, format="mp3")  # read mp3
+    wname = os.path.join(base_file_path, "temp.wav")  # use temporary file
+    mp3_audio.export(wname, format="wav")  # convert to wav
+    FS, data = wavfile.read(wname)  # read wav file
+
+    # Convert to mono if stereo
+    if len(data.shape) == 2:
+        data = np.mean(data, axis=1)
+
+    plt.specgram(data, Fs=FS, NFFT=128, noverlap=0)  # plot
+    plt.savefig(output_file_path)
+    plt.show()
 
 
 def speech_to_text(file_name):
@@ -73,7 +99,6 @@ def main():
     while True:
         file_name = input("Input speech file name to check: ")
         if file_name in files:
-            print(f"File '{file_name}' is valid.")
             print("Transcribing MP3 File to Text")
             break
         else:
@@ -81,26 +106,11 @@ def main():
                 f"File '{file_name}' does not exist in the directory. Please try again."
             )
 
-    # Ensure speech_to_text function is defined
     speech_to_text(file_name)
     Transcript_Counter(file_name)
+    print("Creating Spectogram")
+    MP3_to_Chart(file_name)
 
 
 if __name__ == "__main__":
     main()
-
-# # Load the MP3 file
-# audio_path = "/Users/daniel_huang/Desktop/Practicum/Speeches/trump_farewell_address.mp3"
-# y, sr = librosa.load(audio_path)
-
-# # Generate the spectrogram
-# S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
-# S_dB = librosa.power_to_db(S, ref=np.max)
-
-# # Plot the spectrogram
-# plt.figure(figsize=(10, 4))
-# librosa.display.specshow(S_dB, sr=sr, x_axis="time", y_axis="mel")
-# plt.colorbar(format="%+2.0f dB")
-# plt.title("Mel-frequency spectrogram")
-# plt.tight_layout()
-# plt.show()
