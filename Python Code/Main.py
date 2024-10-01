@@ -19,7 +19,27 @@ def encode_image(image_path):
 
 def analyze_spectrogram(file_name, path):
     image_path = os.path.join(path, "Spectograms", file_name + "-spectogram.png")
+    image_path2 = os.path.join(
+        path, "Spectograms", "Robo-Voice.mp3" + "-spectogram.png"
+    )
+    image_path3 = os.path.join(
+        path, "Spectograms", "Trump-Fake.mp3" + "-spectogram.png"
+    )
+    image_path4 = os.path.join(
+        path, "Spectograms", "Dream-English-Traditional-ABC01.mp3" + "-spectogram.png"
+    )
+    image_path5 = os.path.join(
+        path, "Spectograms", "trump_farewell_address.mp3" + "-spectogram.png"
+    )
+    image_path6 = os.path.join(
+        path, "Spectograms", "first-light-239806.mp3" + "-spectogram.png"
+    )
     base64_image = encode_image(image_path)
+    base64_image2 = encode_image(image_path2)
+    base64_image3 = encode_image(image_path3)
+    base64_image4 = encode_image(image_path4)
+    base64_image5 = encode_image(image_path5)
+    base64_image6 = encode_image(image_path6)
 
     api_key = os.getenv("OPENAI_API_KEY")
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
@@ -32,11 +52,31 @@ def analyze_spectrogram(file_name, path):
                 "content": [
                     {
                         "type": "text",
-                        "text": "Give this spectogram a rating of 0 - 10 on humaness, return it in this format: score: rating amount",
+                        "text": "is the first spectrogram human? use the 2nd and 3rd robo file and the 4,5,6 human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. Dont mention any other files except for the current one: output format: Score: /n Reason: ",
                     },
                     {
                         "type": "image_url",
                         "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image2}"},
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image3}"},
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image4}"},
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image5}"},
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image6}"},
                     },
                 ],
             }
@@ -89,7 +129,7 @@ def MP3_to_Chart(file_name, path):
         plt.specgram(data, Fs=FS, NFFT=128, noverlap=0, cmap="inferno")
         plt.gca().set_facecolor("purple")  # Set background color to purple
         plt.colorbar(format="%+2.0f dB")
-        plt.title("Spectrogram of" + file_name)
+        plt.title("Spectrogram of " + file_name)
         plt.xlabel("Time")
         plt.ylabel("Frequency")
 
