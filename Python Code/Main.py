@@ -1,13 +1,12 @@
-from openai import OpenAI
 import matplotlib.pyplot as plt
-import numpy as np
 from pydub import AudioSegment
-import matplotlib.pyplot as plt
 from scipy.io import wavfile
-import re
-import os
-import base64
+from openai import OpenAI
+import numpy as np
 import requests
+import base64
+import os
+import re
 
 client = OpenAI()
 
@@ -45,14 +44,14 @@ def analyze_spectrogram(file_name, path):
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
 
     payload = {
-        "model": "gpt-4o",
+        "model": "gpt-4o-mini",
         "messages": [
             {
                 "role": "user",
                 "content": [
                     {
                         "type": "text",
-                        "text": "is the first spectrogram human? use the 2nd and 3rd robo file and the 4,5,6 human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. Dont mention any other files except for the current one: output format: Score: /n Reason: ",
+                        "text": "Is the first spectrogram human? use the 2nd and 3rd robo file and the 4,5,6 human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. Dont mention any other files except for the current one. When you reference it just say the provieded file not the first file: output format: Score: /n Reason: ",
                     },
                     {
                         "type": "image_url",
