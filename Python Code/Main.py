@@ -22,9 +22,10 @@ def MP3_to_Chart(file_name):
         "Spectograms",
         f"{os.path.splitext(file_name)[0]}-spectrogram.png",
     )
+    temp_file_path = os.path.join(base_file_path, "Spectograms")
 
     mp3_audio = AudioSegment.from_file(file_path, format="mp3")  # read mp3
-    wname = os.path.join(base_file_path, "temp.wav")  # use temporary file
+    wname = os.path.join(temp_file_path, "temp.wav")  # use temporary file
     mp3_audio.export(wname, format="wav")  # convert to wav
     FS, data = wavfile.read(wname)  # read wav file
 
