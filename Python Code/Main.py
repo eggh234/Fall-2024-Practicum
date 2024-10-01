@@ -8,19 +8,26 @@ import re
 import os
 
 client = OpenAI()
-base_file_path = "/Users/daniel_huang/Desktop/Fall-2024-Practicum"
 
 
-def MP3_to_Chart(file_name):
+def get_directory_path():
+    # Get the current working directory
+    current_dir = os.getcwd()
+    parent_dir = os.path.dirname(current_dir)
+
+    return parent_dir
+
+
+def MP3_to_Chart(file_name, path):
     # Construct the file path
-    file_path = os.path.join(base_file_path, "Speeches", file_name)
+    file_path = os.path.join(path, "Speeches", file_name)
     output_file_path = os.path.join(
-        base_file_path,
+        path,
         "Spectograms",
         f"{os.path.splitext(file_name)[0]}-spectrogram.png",
     )
-    temp_file_path = os.path.join(base_file_path, "Spectograms")
-
+    temp_file_path = os.path.join(path, "Spectograms")
+    print("Creating Spectogram")
     mp3_audio = AudioSegment.from_file(file_path, format="mp3")  # read mp3
     wname = os.path.join(temp_file_path, "temp.wav")  # use temporary file
     mp3_audio.export(wname, format="wav")  # convert to wav
@@ -35,9 +42,9 @@ def MP3_to_Chart(file_name):
     plt.show()
 
 
-def speech_to_text(file_name):
-    file_path = os.path.join(base_file_path, "Speeches", f"{file_name}")
-    output_dir = os.path.join(base_file_path, "Text_Transcripts")
+def Speech_to_text(file_name, path):
+    file_path = os.path.join(path, "Speeches", f"{file_name}")
+    output_dir = os.path.join(path, "Text_Transcripts")
     output_file_path = os.path.join(output_dir, f"{file_name}-transcript.txt")
 
     audio_file = open(file_path, "rb")
@@ -52,9 +59,9 @@ def speech_to_text(file_name):
     print("Formatted transcription saved to", output_file_path)
 
 
-def Transcript_Counter(file_name):
+def Transcript_Counter(file_name, path):
     transcript_file_path = os.path.join(
-        base_file_path, "Text_Transcripts", f"{file_name}-transcript.txt"
+        path, "Text_Transcripts", f"{file_name}-transcript.txt"
     )
 
     word_counts = {}
@@ -72,16 +79,15 @@ def Transcript_Counter(file_name):
             else:
                 word_counts[word] = 1
 
-    output_file_name = os.path.join(
-        base_file_path, "Text_Counter", f"{file_name}-count.txt"
-    )
+    output_file_name = os.path.join(path, "Text_Counter", f"{file_name}-count.txt")
     with open(output_file_name, "w") as output_file:
         for word, count in word_counts.items():
             output_file.write(f"{word}: {count}\n")
 
 
 def main():
-    speeches_path = os.path.join(base_file_path, "Speeches")
+    path = get_directory_path()
+    speeches_path = os.path.join(path, "Speeches")
     try:
         # List all files in the directory
         files = os.listdir(speeches_path)
@@ -104,10 +110,10 @@ def main():
                 f"File '{file_name}' does not exist in the directory. Please try again."
             )
 
-    speech_to_text(file_name)
-    Transcript_Counter(file_name)
-    print("Creating Spectogram")
-    MP3_to_Chart(file_name)
+    Speech_to_text(file_name, path)
+    Transcript_Counter(file_name, path)
+    MP3_to_Chart(file_name, path)
+    # Give_Rating(file_name)
 
 
 if __name__ == "__main__":
