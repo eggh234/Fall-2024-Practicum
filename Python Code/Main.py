@@ -32,7 +32,7 @@ def analyze_spectrogram(file_name, path):
                 "content": [
                     {
                         "type": "text",
-                        "text": "Give this spectogram a rating of 0 - 10 on humaness, return it in this format: score: 0-10",
+                        "text": "Give this spectogram a rating of 0 - 10 on humaness, return it in this format: score: rating amount",
                     },
                     {
                         "type": "image_url",
@@ -48,8 +48,6 @@ def analyze_spectrogram(file_name, path):
         "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
     )
     response_dict = response.json()
-    print(image_path)
-    print(response.json())
     message_content = response_dict["choices"][0]["message"]["content"]
     print(message_content)
 
