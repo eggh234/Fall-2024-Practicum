@@ -1,0 +1,8 @@
+it: 1
+snowed: 1
+rained: 1
+and: 1
+hailed: 1
+the: 1
+same: 1
+morning: 1
