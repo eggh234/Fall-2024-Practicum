@@ -33,12 +33,21 @@ def analyze_spectrogram(file_name, path):
     image_path6 = os.path.join(
         path, "Spectograms", "first-light-239806.mp3" + "-spectogram.png"
     )
+    image_path7 = os.path.join(
+        path, "Spectograms", "Oliver-Pool-Jump.mp3" + "-spectogram.png"
+    )
+    image_path8 = os.path.join(
+        path, "Spectograms", "House_Party.mp3" + "-spectogram.png"
+    )
+
     base64_image = encode_image(image_path)
     base64_image2 = encode_image(image_path2)
     base64_image3 = encode_image(image_path3)
     base64_image4 = encode_image(image_path4)
     base64_image5 = encode_image(image_path5)
     base64_image6 = encode_image(image_path6)
+    base64_image7 = encode_image(image_path7)
+    base64_image8 = encode_image(image_path8)
 
     api_key = os.getenv("OPENAI_API_KEY")
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
@@ -51,7 +60,7 @@ def analyze_spectrogram(file_name, path):
                 "content": [
                     {
                         "type": "text",
-                        "text": "Is the first spectrogram human? use the 2nd and 3rd robo file and the 4,5,6 human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. Dont mention any other files except for the current one. When you reference it just say the provieded file not the first file: output format: Score: /n Reason: ",
+                        "text": "Is the first spectrogram human? use the 2nd and 3rd robo file and all files starting from 4th are human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. Dont mention any other files except for the current one. When you reference it just say the provieded file not the first file: output format: Score: /n Reason: ",
                     },
                     {
                         "type": "image_url",
@@ -76,6 +85,14 @@ def analyze_spectrogram(file_name, path):
                     {
                         "type": "image_url",
                         "image_url": {"url": f"data:image/jpeg;base64,{base64_image6}"},
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image7}"},
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image8}"},
                     },
                 ],
             }
