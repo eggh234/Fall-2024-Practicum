@@ -5,8 +5,8 @@ from openai import OpenAI
 import numpy as np
 import requests
 import base64
-import os
 import re
+import os
 
 client = OpenAI()
 
@@ -60,7 +60,10 @@ def analyze_spectrogram(file_name, path):
                 "content": [
                     {
                         "type": "text",
-                        "text": "Is the first spectrogram human? use the 2nd and 3rd robo file and all files starting from 4th are human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. Dont mention any other files except for the current one. When you reference it just say the provieded file not the first file: output format: Score: /n Reason: ",
+                        "text": "Is the first spectrogram human?"
+                        "Use the 2nd and 3rd robo file and all files starting from 4th are human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. "
+                        "Dont mention any other files except for the current one. be more lenient on grading currently even human files are getting 4s. When you reference it just say the provieded file not the first file: "
+                        "output format: Score: /n Reason: ",
                     },
                     {
                         "type": "image_url",
