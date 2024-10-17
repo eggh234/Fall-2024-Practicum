@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results for {{ filename }}</title>
+  </head>
+  <body>
+    <h1>Results for {{ filename }}</h1>
+
+    {% if transcription %}
+    <h2>Transcription:</h2>
+    <pre>{{ transcription }}</pre>
+    {% else %}
+    <p>No transcription found.</p>
+    {% endif %} {% if spectrogram_image_url %}
+    <h2>Spectrogram:</h2>
+    <img
+      src="{{ spectrogram_image_url }}"
+      alt="Spectrogram for {{ filename }}"
+    />
+    {% else %}
+    <p>No spectrogram found.</p>
+    {% endif %} {% if chatgpt_output %}
+    <h2>ChatGPT Response:</h2>
+    <pre>{{ chatgpt_output }}</pre>
+    {% else %}
+    <p>No ChatGPT response found.</p>
+    {% endif %}
+  </body>
+</html>
