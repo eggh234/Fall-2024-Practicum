@@ -4,28 +4,83 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Results for {{ filename }}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h2 {
+        color: #3498db;
+        margin-top: 20px;
+      }
+      p {
+        font-size: 1rem;
+        color: #555;
+      }
+      pre {
+        background-color: #f8f8f8;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 10px auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      .no-data {
+        font-style: italic;
+        color: #888;
+      }
+    </style>
   </head>
   <body>
-    <h1>Results for {{ filename }}</h1>
+    <div class="container">
+      <h1>Results for {{ filename }}</h1>
 
-    {% if transcription %}
-    <h2>Transcription:</h2>
-    <pre>{{ transcription }}</pre>
-    {% else %}
-    <p>No transcription found.</p>
-    {% endif %} {% if spectrogram_image_url %}
-    <h2>Spectrogram:</h2>
-    <img
-      src="{{ spectrogram_image_url }}"
-      alt="Spectrogram for {{ filename }}"
-    />
-    {% else %}
-    <p>No spectrogram found.</p>
-    {% endif %} {% if chatgpt_output %}
-    <h2>ChatGPT Response:</h2>
-    <pre>{{ chatgpt_output }}</pre>
-    {% else %}
-    <p>No ChatGPT response found.</p>
-    {% endif %}
+      {% if transcription %}
+      <h2>Transcription:</h2>
+      <pre>{{ transcription }}</pre>
+      {% else %}
+      <p class="no-data">No transcription found.</p>
+      {% endif %} {% if spectrogram_image_url %}
+      <h2>Spectrogram:</h2>
+      <img
+        src="{{ url_for('static', filename='spectograms/' + filename + '-spectogram.png') }}"
+        alt="Spectrogram for {{ filename }}"
+      />
+      {% else %}
+      <p class="no-data">No spectrogram found.</p>
+      {% endif %} {% if chatgpt_output %}
+      <h2>Deepfake Detector Response:</h2>
+      <pre>{{ chatgpt_output }}</pre>
+      {% else %}
+      <p class="no-data">No detector response found.</p>
+      {% endif %}
+    </div>
   </body>
 </html>
