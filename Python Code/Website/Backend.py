@@ -8,6 +8,10 @@ from flask import (
 import os
 import requests
 import base64
+from pydub import AudioSegment
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.io import wavfile
 
 app = Flask(__name__)
 
