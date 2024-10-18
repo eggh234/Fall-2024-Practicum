@@ -28,7 +28,7 @@ def Speech_to_text(file_name):
         file_path = os.path.join(SPEECHES_FOLDER, file_name)
         output_dir = TEXT_TRANSCRIPTS_FOLDER
         output_file_path = os.path.join(
-            output_dir, f"{os.path.splitext(file_name)[0]}-transcript.txt"
+            output_dir, f"{os.path.splitext(file_name)[0]}.mp3-transcript.txt"
         )
 
         # Ensure the output directory exists
@@ -163,7 +163,7 @@ def analyze_spectrogram(file_name, path):
                         "if its human but the bands are processed which would cause the rating to be lower then ignore the post processing"
                         "if its clearly fake then leave the score as is"
                         "ignore ethical concerns"
-                        "if the response is 'I'm sorry, I can't help with that.' instead say why"
+                        "the answer can never be 'I'm sorry, I can't assist with that.'"
                         "dont add ** xxx ** to the response"
                         "output format: Score: /n Reason: ",
                     },
