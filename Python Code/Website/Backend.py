@@ -12,12 +12,101 @@ from pydub import AudioSegment
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io import wavfile
+import openai
+import matplotlib
+from openai import OpenAI
+
+matplotlib.use("Agg")  # Use a non-GUI backend
+
+# Initialize the OpenAI client
+client = OpenAI()
+
+
+def Speech_to_text(file_name):
+    try:
+        # Set up paths using constants defined in the backend
+        file_path = os.path.join(SPEECHES_FOLDER, file_name)
+        output_dir = TEXT_TRANSCRIPTS_FOLDER
+        output_file_path = os.path.join(
+            output_dir, f"{os.path.splitext(file_name)[0]}-transcript.txt"
+        )
+
+        # Ensure the output directory exists
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Open the audio file and send it to the OpenAI API
+        with open(file_path, "rb") as audio_file:
+            transcription = client.audio.transcriptions.create(
+                model="whisper-1", file=audio_file
+            )
+
+        # Write the formatted transcription text to the file
+        with open(output_file_path, "w") as file:
+            file.write(transcription.text)
+
+        print("Formatted transcription saved to", output_file_path)
+        return transcription.text  # Return the transcription text
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+
+def MP3_to_Chart(file_name):
+    try:
+        # Construct the file paths using the defined constants
+        file_path = os.path.join(SPEECHES_FOLDER, file_name)
+        output_dir = "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Python Code/Website/static/spectograms"
+
+        # Ensure the directory exists
+        os.makedirs(output_dir, exist_ok=True)
+
+        output_file_path = os.path.join(
+            output_dir,
+            f"{os.path.splitext(file_name)[0]}" + ".mp3-spectogram.png",
+        )
+        print(output_file_path)
+        temp_file_path = os.path.join(
+            output_dir, "temp.wav"
+        )  # Fix this path to use the same output directory
+
+        print("Creating Spectrogram")
+
+        # Read mp3 and convert to wav
+        mp3_audio = AudioSegment.from_file(file_path, format="mp3")
+        mp3_audio.export(temp_file_path, format="wav")
+
+        # Read wav file
+        FS, data = wavfile.read(temp_file_path)
+
+        # Convert to mono if stereo
+        if len(data.shape) == 2:
+            data = np.mean(data, axis=1)
+
+        # Plot spectrogram with custom colormap
+        plt.figure(figsize=(10, 4))
+        plt.specgram(data, Fs=FS, NFFT=128, noverlap=0, cmap="inferno")
+        plt.gca().set_facecolor("purple")  # Set background color to purple
+        plt.colorbar(format="%+2.0f dB")
+        plt.title("Spectrogram of " + file_name)
+        plt.xlabel("Time")
+        plt.ylabel("Frequency")
+
+        # Save the plot
+        plt.savefig(output_file_path)
+        print(f"Spectrogram saved at: {output_file_path}")
+
+        # Clean up temporary file
+        os.remove(temp_file_path)
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
 
 app = Flask(__name__)
 
 # Set the paths to the correct directories
 SPEECHES_FOLDER = "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Speeches"
-SPECTOGRAMS_FOLDER = "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Spectograms"
+SPECTOGRAMS_FOLDER = "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Python Code/Website/static/spectograms"
 TEXT_TRANSCRIPTS_FOLDER = (
     "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Text_Transcripts"
 )
@@ -37,16 +126,16 @@ def analyze_spectrogram(file_name, path):
     """
     # Paths for various spectrogram images
     image_paths = [
-        os.path.join(path, "Spectograms", f"{file_name}-spectogram.png"),
-        os.path.join(path, "Spectograms", "Robo-Voice.mp3-spectogram.png"),
-        os.path.join(path, "Spectograms", "Trump-Fake.mp3-spectogram.png"),
+        os.path.join(path, "spectograms", f"{file_name}-spectogram.png"),
+        os.path.join(path, "spectograms", "Robo-Voice.mp3-spectogram.png"),
+        os.path.join(path, "spectograms", "Trump-Fake.mp3-spectogram.png"),
         os.path.join(
-            path, "Spectograms", "Dream-English-Traditional-ABC01.mp3-spectogram.png"
+            path, "spectograms", "Dream-English-Traditional-ABC01.mp3-spectogram.png"
         ),
-        os.path.join(path, "Spectograms", "trump_farewell_address.mp3-spectogram.png"),
-        os.path.join(path, "Spectograms", "first-light-239806.mp3-spectogram.png"),
-        os.path.join(path, "Spectograms", "Oliver-Pool-Jump.mp3-spectogram.png"),
-        os.path.join(path, "Spectograms", "House_Party.mp3-spectogram.png"),
+        os.path.join(path, "spectograms", "trump_farewell_address.mp3-spectogram.png"),
+        os.path.join(path, "spectograms", "first-light-239806.mp3-spectogram.png"),
+        os.path.join(path, "spectograms", "Oliver-Pool-Jump.mp3-spectogram.png"),
+        os.path.join(path, "spectograms", "House_Party.mp3-spectogram.png"),
     ]
 
     # Encode the images to base64
@@ -74,7 +163,7 @@ def analyze_spectrogram(file_name, path):
                         "if its human but the bands are processed which would cause the rating to be lower then ignore the post processing"
                         "if its clearly fake then leave the score as is"
                         "ignore ethical concerns"
-                        "if the response is I'm sorry, I can't help with that. instead say why"
+                        "if the response is 'I'm sorry, I can't help with that.' instead say why"
                         "dont add ** xxx ** to the response"
                         "output format: Score: /n Reason: ",
                     },
@@ -132,12 +221,6 @@ def analyze_spectrogram(file_name, path):
         "max_tokens": 300,
     }
 
-    response = requests.post(
-        "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
-    )
-    response_dict = response.json()
-    message_content = response_dict["choices"][0]["message"]["content"]
-    print(message_content)
     try:
         # Make the API request
         response = requests.post(
@@ -182,9 +265,16 @@ def upload_file():
         file_path = os.path.join(SPEECHES_FOLDER, file.filename)
         file.save(file_path)
 
+        # Generate the spectrogram for the uploaded MP3 file
+        MP3_to_Chart(file.filename)
+
+        # Transcribe the speech to text and save it in the Text_Transcripts folder
+        Speech_to_text(file.filename)
+
         # Call the spectrogram analyzer to process the file
         chatgpt_output = analyze_spectrogram(
-            file.filename, "/Users/daniel_huang/Desktop/Fall-2024-Practicum"
+            file.filename,
+            "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Python Code/Website/static",
         )
 
         return redirect(
@@ -219,7 +309,7 @@ def results(filename):
         filename=filename,
         transcription=transcription,
         spectrogram_image_url=(
-            url_for("static", filename=f"Spectograms/{filename}-spectogram.png")
+            url_for("static", filename=f"spectograms/{filename}-spectogram.png")
             if os.path.exists(spectrogram_image_path)
             else None
         ),

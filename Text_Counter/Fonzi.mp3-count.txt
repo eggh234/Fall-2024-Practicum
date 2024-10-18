@@ -1,0 +1,16 @@
+what: 1
+is: 2
+computer: 2
+science: 2
+the: 3
+interaction: 1
+between: 1
+ideals: 1
+of: 1
+abstraction: 1
+as: 2
+well: 1
+devices: 1
+for: 1
+numerical: 1
+computation: 1
