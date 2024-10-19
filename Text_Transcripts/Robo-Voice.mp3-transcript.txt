@@ -1,1 +1,6 @@
 It snowed, rained, and hailed the same morning.
+
+Sentiment Analysis:
+Sentiment: Neutral
+Polarity: 0.0
+Subjectivity: 0.125

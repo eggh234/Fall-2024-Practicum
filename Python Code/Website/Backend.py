@@ -64,8 +64,19 @@ def MP3_to_Chart(file_name):
         file_path = os.path.join(SPEECHES_FOLDER, file_name)
         output_dir = "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Python Code/Website/static/spectograms"
 
-        # Ensure the directory exists
+        # Ensure the output directory exists
         os.makedirs(output_dir, exist_ok=True)
+
+        # Define the destination path for the uploaded file
+        destination_dir = "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Python Code/Website/static/uploads"
+        destination_path = os.path.join(destination_dir, file_name)
+
+        # Ensure the destination directory exists
+        os.makedirs(destination_dir, exist_ok=True)
+
+        # Copy the uploaded file to the destination path
+        shutil.copy(file_path, destination_path)
+        print(f"File copied to: {destination_path}")
 
         output_file_path = os.path.join(
             output_dir,
@@ -74,7 +85,7 @@ def MP3_to_Chart(file_name):
         print(output_file_path)
         temp_file_path = os.path.join(
             output_dir, "temp.wav"
-        )  # Fix this path to use the same output directory
+        )  # Use the same output directory
 
         print("Creating Spectrogram")
 
