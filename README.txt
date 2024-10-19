@@ -1,6 +1,10 @@
 How to run the program
 
 Step 1:
+Cloning the repository
+Run this command in the folder you wish the project to be in
+https://github.com/eggh234/Fall-2024-Practicum.git
+
 Setting up local env
 Run this commend to create a venv directory and start a instance
 python3 -m venv venv
@@ -8,6 +12,7 @@ python3 -m venv venv
 Activate the local environment
 On Windows:
 venv\Scripts\activate
+
 On macOS and Linux:
 source venv/bin/activate
 
