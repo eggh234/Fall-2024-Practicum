@@ -85,4 +85,4 @@ Copy & Paste the provied link into browser
 Example link: http://127.0.0.1:5000
 
 Step 5:
-Upload files and enjoy the results
+Upload files and enjoy the results in the web browser
