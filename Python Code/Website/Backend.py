@@ -1,21 +1,21 @@
 from flask import (
-    Flask,
     render_template,
-    request,
     redirect,
     url_for,
+    request,
+    Flask,
 )
-import os
+
+import matplotlib.pyplot as plt
+from pydub import AudioSegment
+from scipy.io import wavfile
+from openai import OpenAI
+import numpy as np
+import matplotlib
 import requests
 import base64
-from pydub import AudioSegment
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.io import wavfile
-import openai
-import matplotlib
-from openai import OpenAI
 import shutil
+import os
 
 matplotlib.use("Agg")  # Use a non-GUI backend
 
