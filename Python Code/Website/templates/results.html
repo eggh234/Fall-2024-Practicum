@@ -72,6 +72,33 @@
       <pre>{{ transcription }}</pre>
       {% else %}
       <p class="no-data">No transcription found.</p>
+      {% endif %} {% if sentiment %}
+      <h2>Sentiment Analysis Result:</h2>
+      <pre>
+Sentiment: {{ sentiment }}
+Polarity: {{ polarity }}
+Subjectivity: {{ subjectivity }}
+        </pre
+      >
+
+      <h3>Explanation:</h3>
+      <ul>
+        <li>
+          <strong>Sentiment:</strong> Indicates whether the overall sentiment is
+          positive, negative, or neutral based on the text.
+        </li>
+        <li>
+          <strong>Polarity:</strong> A value between -1.0 (very negative) and
+          1.0 (very positive) representing the intensity of the sentiment.
+        </li>
+        <li>
+          <strong>Subjectivity:</strong> A value between 0.0 (very objective)
+          and 1.0 (very subjective) indicating the degree of personal opinion or
+          bias.
+        </li>
+      </ul>
+      {% else %}
+      <p class="no-data">No sentiment analysis available.</p>
       {% endif %} {% if filename %}
       <h2>Original Audio File:</h2>
       <audio controls>
@@ -86,7 +113,7 @@
       {% endif %} {% if spectrogram_image_url %}
       <h2>Spectrogram:</h2>
       <img
-        src="{{ url_for('static', filename='spectograms/' + filename + '-spectogram.png') }}"
+        src="{{ spectrogram_image_url }}"
         alt="Spectrogram for {{ filename }}"
       />
       {% else %}

@@ -8,6 +8,7 @@ from flask import (
 
 import matplotlib.pyplot as plt
 from pydub import AudioSegment
+from textblob import TextBlob
 from scipy.io import wavfile
 from openai import OpenAI
 import numpy as np
@@ -21,6 +22,39 @@ matplotlib.use("Agg")  # Use a non-GUI backend
 
 # Initialize the OpenAI client
 client = OpenAI()
+
+
+def analyze_sentiment(text):
+    try:
+        from textblob import TextBlob
+
+        # Create a TextBlob object
+        blob = TextBlob(text)
+
+        # Get the sentiment polarity and subjectivity
+        sentiment_polarity = blob.sentiment.polarity
+        sentiment_subjectivity = blob.sentiment.subjectivity
+
+        # Determine the sentiment label based on polarity
+        if sentiment_polarity > 0:
+            sentiment_label = "Positive"
+        elif sentiment_polarity < 0:
+            sentiment_label = "Negative"
+        else:
+            sentiment_label = "Neutral"
+
+        # Create the result dictionary
+        sentiment_result = {
+            "sentiment": sentiment_label,
+            "polarity": sentiment_polarity,
+            "subjectivity": sentiment_subjectivity,
+        }
+
+        return sentiment_result
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return {"error": str(e)}
 
 
 def Speech_to_text(file_name):
@@ -286,7 +320,7 @@ def upload_file():
         MP3_to_Chart(file.filename)
 
         # Transcribe the speech to text and save it in the Text_Transcripts folder
-        Speech_to_text(file.filename)
+        transcript = Speech_to_text(file.filename)
 
         # Call the spectrogram analyzer to process the file
         chatgpt_output = analyze_spectrogram(
@@ -294,8 +328,30 @@ def upload_file():
             "/Users/daniel_huang/Desktop/Fall-2024-Practicum/Python Code/Website/static",
         )
 
+        # Call the sentiment analysis function with the transcript
+        sentiment_result = analyze_sentiment(transcript)
+
+        # Extract components from the sentiment_result
+        sentiment_label = sentiment_result.get("sentiment", "N/A")
+        polarity = sentiment_result.get("polarity", 0.0)
+        subjectivity = sentiment_result.get("subjectivity", 0.0)
+
+        # Print the sentiment result for debugging
+        print("Sentiment Analysis Result:")
+        print(f"Sentiment: {sentiment_label}")
+        print(f"Polarity: {polarity}")
+        print(f"Subjectivity: {subjectivity}")
+
+        # Redirect to the results page with sentiment components
         return redirect(
-            url_for("results", filename=file.filename, chatgpt_output=chatgpt_output)
+            url_for(
+                "results",
+                filename=file.filename,
+                chatgpt_output=chatgpt_output,
+                sentiment=sentiment_label,
+                polarity=polarity,
+                subjectivity=subjectivity,
+            )
         )
 
 
@@ -317,8 +373,21 @@ def results(filename):
         with open(transcript_file_path, "r") as file:
             transcription = file.read()
 
-    # Get the chatgpt_output from the uploaded file
+    # Get the chatgpt_output from the URL parameters
     chatgpt_output = request.args.get("chatgpt_output", "No response")
+
+    # Retrieve sentiment components from URL parameters
+    sentiment = request.args.get("sentiment", "N/A")
+    polarity = request.args.get("polarity", "0.0")
+    subjectivity = request.args.get("subjectivity", "0.0")
+
+    # Convert polarity and subjectivity to floats
+    try:
+        polarity = float(polarity)
+        subjectivity = float(subjectivity)
+    except ValueError:
+        polarity = 0.0
+        subjectivity = 0.0
 
     # Serve the results page
     return render_template(
@@ -331,6 +400,9 @@ def results(filename):
             else None
         ),
         chatgpt_output=chatgpt_output,
+        sentiment=sentiment,
+        polarity=polarity,
+        subjectivity=subjectivity,
     )
 
 
