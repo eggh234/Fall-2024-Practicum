@@ -209,8 +209,7 @@ def analyze_spectrogram(file_name, path):
                         "type": "text",
                         "text": "Is the first spectrogram human?"
                         "Use the 2nd and 3rd robo file and all files starting from 4th are human file to differentiate between real or fake voice give a rating of 0-10 then decide only give rating for first file. "
-                        "Dont mention any other files except for the current one. be more lenient on grading currently even human files are getting 4s. When you reference it just say the provieded file not the first file: "
-                        "dont mention that grading is suppose to be lenient"
+                        "Dont mention any other files except for the current one. When you reference it just say the provieded file not the first file: "
                         "if its human but the bands are processed which would cause the rating to be lower then ignore the post processing"
                         "if its clearly fake then leave the score as is"
                         "ignore ethical concerns"

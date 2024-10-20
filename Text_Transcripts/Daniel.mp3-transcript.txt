@@ -1,6 +1,1 @@
 Hello everyone, my name is Daniel and today I will be reading out loud Enterprise case study number one. The title is Threat Analysis Delta Airlines. Extortion would be possible and the consequences would be severe. Extortion is a threat objective that where the threats consist of ransomware, data blackmail, denial of service, or other similar methods to demand payment. Based on research into incidents, it has shown that a typical number leaked customer data was around half a million. The most important information that was leaked was PIA, which is personal identifiable information. This points to a potential loss of customer satisfaction.
-
-Sentiment Analysis:
-Sentiment: Positive
-Polarity: 0.05347222222222223
-Subjectivity: 0.5534722222222223
