@@ -3,7 +3,7 @@ How to run the program
 Step 1:
 Cloning the repository
 Run this command in the folder you wish the project to be in
-https://github.com/eggh234/Fall-2024-Practicum.git
+git clone https://github.com/eggh234/Fall-2024-Practicum.git
 
 Setting up local env
 Run this commend to create a venv directory and start a instance
@@ -44,7 +44,7 @@ Required dependency Flask
 Example command:
 pip install Flask
 
-repeat for all imports below
+Repeat for all imports below
 Flask
 matplotlib
 numpy
@@ -55,9 +55,9 @@ scipy
 textblob
 
 Step 3:
-Setting up the code
+Setting up the project directory
 
-ensure your project directory is as follows
+Ensure your project directory is as follows
 
 Main Folder
 ├── venv/
