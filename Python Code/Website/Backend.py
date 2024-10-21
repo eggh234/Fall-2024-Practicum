@@ -36,7 +36,6 @@ path_up_to_static = os.path.join(current_dir.split("static")[0], "static")
 
 def analyze_sentiment(text):
     try:
-        from textblob import TextBlob
 
         # Create a TextBlob object
         blob = TextBlob(text)
