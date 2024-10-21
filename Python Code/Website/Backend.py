@@ -112,8 +112,6 @@ def MP3_to_Chart(file_name):
 
         # Define the destination path for the uploaded file
         destination_dir = os.path.join(path_up_to_static, "uploads")
-        print("test")
-        print(path_up_to_static)
         destination_path = os.path.join(destination_dir, file_name)
 
         # Ensure the destination directory exists
