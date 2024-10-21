@@ -19,6 +19,16 @@ source venv/bin/activate
 Your terminal should now show a venv at the beginning
 
 Step 2:
+Make an API Key by going to this website, logging in, and creating a new key
+https://platform.openai.com/docs/overview
+
+Set up OpenAI API Key
+Go to terminal and type
+export OPENAI_API_KEY="YOUR_API_KEY_HERE"
+
+This sets an environment variable called OPENAI_API_KEY which stores your key. This is the env variable called by the program to avoid the need to hardcode the value.
+
+Step 3:
 Install dependencies
 
 Install pip
@@ -54,7 +64,7 @@ requests
 scipy
 textblob
 
-Step 3:
+Step 4:
 Setting up the project directory
 
 Ensure your project directory is as follows
@@ -74,7 +84,7 @@ Main Folder
 └── Text_Transcripts/
     └── [Transcripts will be automatically created here]
 
-Step 4:
+Step 5:
 Running the program
 Go to Backend.py 
 
@@ -84,5 +94,5 @@ python3 Backend.py
 Copy & Paste the provied link into browser
 Example link: http://127.0.0.1:5000
 
-Step 5:
+Step 6:
 Upload files and enjoy the results in the web browser
