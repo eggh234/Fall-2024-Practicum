@@ -1,0 +1,95 @@
+Title: Daniel.mp3
+True Value: Real
+Returned Value: 7/10, Real
+Matching: True
+
+Title: Dream-English-Traditional-ABC01.mp3
+True Value: Unsure
+Returned Value: Fake, 5/10
+Matching: True
+
+Title: First-light-239806.mp3
+True Value: Fake
+Returned Value: Fake, 3/10
+Matching: True
+
+Title: Fonzie.mp3
+True Value: Real
+Returned Value: Real, 7/10
+Matching: True
+
+Title: House_party.mp3
+True Value: Real
+Returned Value: Real, 8/10
+Matching: True
+
+Title: Oliver-Pool-Jump.mp3
+True Value: Real
+Returned Value: Real, 7/10
+Matching: True
+
+Title: Robo-Voice.mp3
+True Value: Fake
+Returned Value: Fake, 2/10
+Matching: True
+
+Title: Subscribe.mp3
+True Value: Fake
+Returned Value: True, 7/10
+Matching: False
+
+Title: Synthesized_Audio.mp3
+True Value: Fake
+Returned Value: Fake, 3/10
+Matching: True
+
+Title: Trump_farewell_address.mp3
+True Value: Real
+Returned Value: Fake, 5/10
+Matching: False
+
+Title: Trump-Fake.mp3
+True Value: Fake
+Returned Value: Fake, 3/10
+Matching: True
+
+Title: Trump-Phishing-Deepfake.mp3
+True Value: Fake
+Returned Value: 4/10, Fake
+Matching: True
+
+Title: 
+True Value: 
+Returned Value: 
+Matching: 
+
+Title: 
+True Value: 
+Returned Value: 
+Matching: 
+
+Title: 
+True Value: 
+Returned Value: 
+Matching: 
+
+Title: 
+True Value: 
+Returned Value: 
+Matching: 
+
+Title: 
+True Value: 
+Returned Value: 
+Matching: 
+
+Title: 
+True Value: 
+Returned Value: 
+Matching: 
+
+Title: 
+True Value: 
+Returned Value: 
+Matching: 
+
