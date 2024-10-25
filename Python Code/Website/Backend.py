@@ -9,7 +9,7 @@ from flask import (
 import matplotlib.pyplot as plt
 from pydub import AudioSegment
 
-from textblob import TextBlob
+from textblob import TextBlob  # type: ignore
 from scipy.io import wavfile
 from openai import OpenAI
 import numpy as np

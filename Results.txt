@@ -60,33 +60,33 @@ Matching: True
 
 Title: ai-voiceover-media.mp3
 True Value: Fake
-Returned Value: 
-Matching: 
+Returned Value: Fake, 3/10
+Matching: True
 
 Title: Galvanized-Square-Steel.mp3
 True Value: Fake
-Returned Value: 
-Matching: 
+Returned Value: Fake, 2/10
+Matching: True
 
 Title: Manual-voiceover.mp3
 True Value: Real
-Returned Value: 
-Matching: 
+Returned Value: Real, 8/10
+Matching: True
 
 Title: pepperspray-ai.mp3
 True Value: Fake
-Returned Value: 
-Matching: 
+Returned Value: Fake, 3/10
+Matching: True
 
 Title: Soccer.mp3
 True Value: Fake
-Returned Value: 
-Matching: 
+Returned Value: Real, 8/10
+Matching: False
 
 Title: Waffle-Dog.mp3
 True Value: Fake
-Returned Value: 
-Matching: 
+Returned Value: Fake, 5/10
+Matching: True
 
 Title: 
 True Value: 
