@@ -226,7 +226,8 @@ def analyze_spectrogram(file_name, path):
                         "be more lenient since human voices are getting rated as fake but dont mention leniency in the final score"
                         "the answer can never be 'I'm sorry, I can't assist with that.'"
                         "dont add ** xxx ** to the response"
-                        "output format: Score: x/10 /n Real or Fake: your opinion /n Reason: ",
+                        "output format: Score: x/10 /n Personal Recommendation: Real or Fake /n Reason: "
+                        "dont add ** xxx ** to the response",
                     },
                     {
                         "type": "image_url",
