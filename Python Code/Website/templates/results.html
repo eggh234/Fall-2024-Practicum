@@ -118,13 +118,15 @@ Subjectivity: {{ subjectivity }}
       />
       <h3>Explanation of the Spectrogram:</h3>
       <p>
-          The spectrogram visualizes the audio signal, helping users to assess its authenticity. 
-          It shows the frequency distribution of the audio over time:
-          <ul>
-              <li>Perfectly aligned and consistent bands may suggest the presence of AI-generated audio, as synthetic voices tend to lack natural variation.</li>
-              <li>In contrast, natural human voices exhibit inflections and variations in pitch, resulting in a more nuanced and less structured appearance in the spectrogram.</li>
-          </ul>
-          The spectrogram is meant to be used as a visual aid to determine if the audio has the natural qualities expected in human speech or if it appears artificially generated.
+        The spectrogram visualizes the audio signal, helping users to assess its authenticity. 
+        It shows the frequency distribution of the audio over time:
+        <ul>
+            <li>Perfectly aligned and consistent bands may suggest the presence of AI-generated audio, as synthetic voices tend to lack natural variation.</li>
+            <li>In contrast, natural human voices exhibit inflections and variations in pitch, resulting in a more nuanced and less structured appearance in the spectrogram.</li>
+        </ul>
+        The spectrogram is meant to be used as a visual aid to determine if the audio has the natural qualities expected in human speech or if it appears artificially generated.
+        <br /><br />
+        <strong>Disclaimer:</strong> Due to most devices/interviews adding post-processing effects such as autotune, the chart may not be fully representative.    
       </p>
       {% else %}
       <p class="no-data">No spectrogram found.</p>
@@ -142,6 +144,8 @@ Subjectivity: {{ subjectivity }}
           </ul>
           Each point corresponds to a 10% increment in confidence. 
           A score of <strong>6 or above</strong> indicates the audio is likely real, while anything below suggests it may be fake.
+          <br /><br />
+          <strong>Disclaimer:</strong> The detector struggles with post processing such as interviews as well as phone recording due to how the auto tune works by filtering out extreme ranges.
       </p>
       {% else %}
       <p class="no-data">No detector response found.</p>
