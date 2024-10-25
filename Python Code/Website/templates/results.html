@@ -121,9 +121,20 @@ Subjectivity: {{ subjectivity }}
       {% endif %} {% if chatgpt_output %}
       <h2>Deepfake Detector Response:</h2>
       <pre>{{ chatgpt_output }}</pre>
+      <h3>Scoring System Explanation:</h3>
+      <p>
+          The scoring system reflects the confidence level of the detector regarding the authenticity of the provided audio. 
+          It operates on a linear scale from 0 to 10:
+          <ul>
+              <li><strong>0:</strong> No confidence that the audio is real.</li>
+              <li><strong>10:</strong> Maximum confidence that the audio is real.</li>
+          </ul>
+          Each point corresponds to a 10% increment in confidence. 
+          A score of <strong>6 or above</strong> indicates the audio is likely real, while anything below suggests it may be fake.
+      </p>
       {% else %}
       <p class="no-data">No detector response found.</p>
-      {% endif %}
+      {% endif %}      
     </div>
   </body>
 </html>
