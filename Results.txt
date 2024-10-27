@@ -1,3 +1,8 @@
+Overall Percentage: 85%
+Total Sample Size: 20
+False Matching: 3
+True Matching: 17
+
 Title: Daniel.mp3
 True Value: Real
 Returned Value: 7/10, Real
