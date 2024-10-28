@@ -1,4 +1,4 @@
-from flask import (
+from flask import (  # type: ignore
     render_template,
     redirect,
     url_for,
@@ -6,15 +6,15 @@ from flask import (
     Flask,
 )
 
-import matplotlib.pyplot as plt
-from pydub import AudioSegment
+import matplotlib.pyplot as plt  # type: ignore
+from pydub import AudioSegment  # type: ignore
 
 from textblob import TextBlob  # type: ignore
-from scipy.io import wavfile
-from openai import OpenAI
-import numpy as np
-import matplotlib
-import requests
+from scipy.io import wavfile  # type: ignore
+from openai import OpenAI  # type: ignore
+import numpy as np  # type: ignore
+import matplotlib  # type: ignore
+import requests  # type: ignore
 import base64
 import shutil
 import os
