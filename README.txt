@@ -80,7 +80,8 @@ Main Folder
 │   │   └── results.html
 │   └── Backend.py
 ├── Speeches/
-│   └── [Sample audio files for uploading]
+│   ├── [Sample audio files for uploading]
+│   └── The origin upload folder can be anywhere
 └── Text_Transcripts/
     └── [Transcripts will be automatically created here]
 
