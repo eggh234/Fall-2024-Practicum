@@ -8,7 +8,6 @@ from flask import (  # type: ignore
 
 import matplotlib.pyplot as plt  # type: ignore
 from pydub import AudioSegment  # type: ignore
-
 from textblob import TextBlob  # type: ignore
 from scipy.io import wavfile  # type: ignore
 from openai import OpenAI  # type: ignore
