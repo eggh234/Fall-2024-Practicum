@@ -1,0 +1,1 @@
+This is the world's most advanced woodcutting machine. Before placing the wood inside, a command is given to the computer specifying how many pieces the wood needs to be cut into. As soon as the wood enters, the woodcutter machine, following the instructions given by the computer, slices the wood into the desired pieces. Amazing!

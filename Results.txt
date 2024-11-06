@@ -1,21 +1,26 @@
-Overall Percentage: 85%
-Total Sample Size: 20
-False Matching: 3
-True Matching: 17
-
-Title: Daniel.mp3
-True Value: Real
-Returned Value: 7/10, Real
-Matching: True
+Overall Percentage: 86.84%
+Total Sample Size: 38
+False Matching: 5
+True Matching: 33
 
 Title: Dream-English-Traditional-ABC01.mp3
 True Value: Unsure
 Returned Value: Fake, 5/10
 Matching: True
 
-Title: First-light-239806.mp3
-True Value: Fake
-Returned Value: Fake, 3/10
+Title: Dogs.mp3
+True Value: Real
+Returned Value: Fake
+Matching: False
+
+Title: Dora.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Daniel.mp3
+True Value: Real
+Returned Value: 7/10, Real
 Matching: True
 
 Title: Fonzie.mp3
@@ -33,9 +38,64 @@ True Value: Real
 Returned Value: Real, 7/10
 Matching: True
 
-Title: Robo-Voice.mp3
+Title: Manual-voiceover.mp3
+True Value: Real
+Returned Value: Real, 8/10
+Matching: True
+
+Title: Pillows.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Eating.mp3
+True Value: Real
+Returned Value: Fake
+Matching: False
+
+Title: Eu-in-US.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Facepush.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Dad-Cooking.mp3
+True Value: True
+Returned Value: Real
+Matching: True
+
+Title: Human.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Brainrot.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Mcdonalds.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Shower.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: Trashbag.mp3
+True Value: Real
+Returned Value: Real
+Matching: True
+
+Title: First-light-239806.mp3
 True Value: Fake
-Returned Value: Fake, 2/10
+Returned Value: Fake, 3/10
 Matching: True
 
 Title: Subscribe.mp3
@@ -73,9 +133,9 @@ True Value: Fake
 Returned Value: Fake, 2/10
 Matching: True
 
-Title: Manual-voiceover.mp3
-True Value: Real
-Returned Value: Real, 8/10
+Title: Robo-Voice.mp3
+True Value: Fake
+Returned Value: Fake, 2/10
 Matching: True
 
 Title: pepperspray-ai.mp3
@@ -93,8 +153,42 @@ True Value: Fake
 Returned Value: Fake, 5/10
 Matching: True
 
+Title: Banana-Dog.mp3
+True Value: Fake
+Returned Value: Fake
+Matching: True
+
+Title: Dog-stuff.mp3
+True Value: Fake
+Returned Value: Fake
+Matching: True
+
+Title: Dog.mp3
+True Value: Fake
+Returned Value: Fake
+Matching: True
+
+Title: Peppa-AI.mp3
+True Value: Fake
+Returned Value: Fake
+Matching: True
+
+Title: Peppa-Mom.mp3
+True Value: Fake
+Returned Value: Fake
+Matching: True
+
+Title: Special.mp3
+True Value: Fake
+Returned Value: Fake
+Matching: True
+
+Title: Wood-Cutting.mp3
+True Value: Fake
+Returned Value: Fake
+Matching: True
+
 Title: 
 True Value: 
 Returned Value: 
 Matching: 
-
